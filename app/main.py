@@ -1,10 +1,20 @@
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
 from sqlalchemy import text
 
-from app.core.database import AsyncSessionLocal
+from app.core.database import AsyncSessionLocal, create_tables
+from app.modules.category.routers import router as category_router
+
+@asynccontextmanager
+async def lifespan(app:FastAPI):
+    await create_tables()
+    yield
 
 app = FastAPI(title="Lumina E-Commerce API",
               version="1.0.0")
+
+
 
 @app.get("/")
 async def root():
@@ -25,3 +35,4 @@ async def db_test():
         return {
             "database" : result.scalars()
         }
+app.include_router(category_router)
