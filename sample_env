@@ -1,0 +1,9 @@
+Create a env file including below attributes.
+
+DB_HOST=
+DB_PORT=
+DB_NAME=
+DB_USER=
+DB_PASS=
+POOL_SIZE=
+MAX_OVER_FLOW=
